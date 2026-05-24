@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import anthropic
 
 st.set_page_config(
-    page_title="U.S. Healthcare Shortage AI",
+    page_title="U.S. Healthcare Shortage Dashboard",
     page_icon="🏥",
     layout="wide"
 )
@@ -24,22 +23,6 @@ st.markdown("""
     font-size: 1rem;
     margin-bottom: 2rem;
 }
-.metric-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    border: 1.5px solid rgba(5,150,105,0.15);
-    box-shadow: 0 2px 12px rgba(5,150,105,0.08);
-}
-.sql-box {
-    background: #1e1e1e;
-    color: #d4d4d4;
-    border-radius: 10px;
-    padding: 1rem;
-    font-family: monospace;
-    font-size: 0.85rem;
-    margin: 1rem 0;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -49,100 +32,94 @@ def load_data():
     df = pd.read_csv(url)
     return df
 
-st.markdown('<div class="main-header">🏥 U.S. Healthcare Workforce Shortage AI</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Ask questions about 39,000+ real HRSA shortage records · Built with SQL + Python + Claude AI</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header">🏥 U.S. Healthcare Workforce Shortage Dashboard</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Interactive analysis of 39,000+ real HRSA government records · Built with SQL + Python + Plotly</div>', unsafe_allow_html=True)
 
-try:
-    df = load_data()
-    data_loaded = True
-except:
-    data_loaded = False
-    st.error("Data loading... please refresh in a moment.")
+df = load_data()
 
-if data_loaded:
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Total Records", f"{len(df):,}")
-    with col2:
-        st.metric("States Covered", df['state_name'].nunique())
-    with col3:
-        st.metric("Avg Shortage Score", f"{df['avg_score'].mean():.1f}")
-    with col4:
-        total = df['total_underserved'].sum()
-        st.metric("Total Underserved", f"{total/1e6:.0f}M+")
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.metric("Total Shortage Areas", f"{df['total_shortage_areas'].sum():,}")
+with col2:
+    st.metric("States Covered", df['state_name'].nunique())
+with col3:
+    st.metric("Avg Shortage Score", f"{df['avg_score'].mean():.1f}")
+with col4:
+    total = df['total_underserved'].sum()
+    st.metric("Total Underserved", f"{total/1e6:.0f}M+")
 
-    st.markdown("---")
+st.markdown("---")
 
-    tab1, tab2, tab3 = st.tabs(["🤖 Ask AI", "📊 Dashboard", "💾 SQL Queries"])
+st.sidebar.header("🔍 Filters")
+states = ["All States"] + sorted(df['state_name'].unique().tolist())
+selected_state = st.sidebar.selectbox("Select State", states)
+rural_options = ["All"] + sorted(df['rural_status'].dropna().unique().tolist())
+selected_rural = st.sidebar.selectbox("Rural Status", rural_options)
 
-    with tab1:
-        st.subheader("Ask anything about U.S. healthcare shortages")
-        question = st.text_input("", placeholder="e.g. Which state has the worst shortage? Why is Kentucky so high?")
+filtered = df.copy()
+if selected_state != "All States":
+    filtered = filtered[filtered['state_name'] == selected_state]
+if selected_rural != "All":
+    filtered = filtered[filtered['rural_status'] == selected_rural]
 
-        if question and data_loaded:
-            with st.spinner("Analyzing data..."):
-                summary = df.groupby('state_name').agg({
-                    'avg_score': 'mean',
-                    'total_underserved': 'sum',
-                    'total_shortage_areas': 'sum'
-                }).round(1).to_string()
+tab1, tab2, tab3 = st.tabs(["📊 Charts", "🗺️ State Rankings", "💾 SQL Queries"])
 
-                client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
-                message = client.messages.create(
-                    model="claude-sonnet-4-20250514",
-                    max_tokens=500,
-                    messages=[{
-                        "role": "user",
-                        "content": f"""You are a healthcare data analyst. Answer this question using the data below.
-Be specific, cite actual numbers, and keep your answer to 3-4 sentences.
+with tab1:
+    col_left, col_right = st.columns(2)
 
-Question: {question}
+    with col_left:
+        st.subheader("Top 15 States by Underserved Population")
+        top_states = filtered.groupby('state_name')['total_underserved'].sum().reset_index()
+        top_states = top_states.sort_values('total_underserved', ascending=True).tail(15)
+        fig1 = px.bar(top_states, x='total_underserved', y='state_name',
+                     orientation='h', color='total_underserved',
+                     color_continuous_scale='Oranges',
+                     labels={'total_underserved': 'Total Underserved', 'state_name': ''})
+        fig1.update_layout(showlegend=False, coloraxis_showscale=False, height=500)
+        st.plotly_chart(fig1, use_container_width=True)
 
-Data summary (state, avg_score, total_underserved, total_shortage_areas):
-{summary}"""
-                    }]
-                )
-                st.success(message.content[0].text)
+    with col_right:
+        st.subheader("Top 15 States by Shortage Score")
+        top_score = filtered.groupby('state_name')['avg_score'].mean().reset_index()
+        top_score = top_score.sort_values('avg_score', ascending=True).tail(15)
+        fig2 = px.bar(top_score, x='avg_score', y='state_name',
+                     orientation='h', color='avg_score',
+                     color_continuous_scale='Blues',
+                     labels={'avg_score': 'Avg Shortage Score', 'state_name': ''})
+        fig2.update_layout(showlegend=False, coloraxis_showscale=False, height=500)
+        st.plotly_chart(fig2, use_container_width=True)
 
-    with tab2:
-        col_left, col_right = st.columns(2)
+    st.subheader("Rural vs Non-Rural Shortage Comparison")
+    rural = filtered.groupby('rural_status').agg(
+        total_underserved=('total_underserved', 'sum'),
+        total_areas=('total_shortage_areas', 'sum'),
+        avg_score=('avg_score', 'mean')
+    ).reset_index()
+    fig3 = px.bar(rural, x='rural_status', y='total_underserved',
+                 color='rural_status',
+                 labels={'total_underserved': 'Total Underserved', 'rural_status': 'Area Type'},
+                 color_discrete_sequence=['#059669','#f59e0b','#10b981','#ef4444','#6b7280'])
+    fig3.update_layout(showlegend=False, height=400)
+    st.plotly_chart(fig3, use_container_width=True)
 
-        with col_left:
-            st.subheader("Top States by Underserved Population")
-            top_states = df.groupby('state_name')['total_underserved'].sum().reset_index()
-            top_states = top_states.sort_values('total_underserved', ascending=True).tail(15)
-            fig1 = px.bar(top_states, x='total_underserved', y='state_name',
-                         orientation='h', color='total_underserved',
-                         color_continuous_scale='Oranges',
-                         labels={'total_underserved': 'Total Underserved', 'state_name': ''})
-            fig1.update_layout(showlegend=False, coloraxis_showscale=False, height=450)
-            st.plotly_chart(fig1, use_container_width=True)
+with tab2:
+    st.subheader("Full State Rankings Table")
+    state_summary = filtered.groupby('state_name').agg(
+        avg_score=('avg_score', 'mean'),
+        total_underserved=('total_underserved', 'sum'),
+        total_areas=('total_shortage_areas', 'sum'),
+        providers_needed=('total_providers_needed', 'sum')
+    ).reset_index()
+    state_summary['avg_score'] = state_summary['avg_score'].round(1)
+    state_summary['total_underserved'] = state_summary['total_underserved'].astype(int)
+    state_summary = state_summary.sort_values('avg_score', ascending=False)
+    state_summary.columns = ['State', 'Avg Score', 'Total Underserved', 'Shortage Areas', 'Providers Needed']
+    st.dataframe(state_summary, use_container_width=True, height=500)
 
-        with col_right:
-            st.subheader("Shortage Score by State")
-            top_score = df.groupby('state_name')['avg_score'].mean().reset_index()
-            top_score = top_score.sort_values('avg_score', ascending=True).tail(15)
-            fig2 = px.bar(top_score, x='avg_score', y='state_name',
-                         orientation='h', color='avg_score',
-                         color_continuous_scale='Blues',
-                         labels={'avg_score': 'Avg Shortage Score', 'state_name': ''})
-            fig2.update_layout(showlegend=False, coloraxis_showscale=False, height=450)
-            st.plotly_chart(fig2, use_container_width=True)
-
-        st.subheader("Rural vs Non-Rural Shortage Comparison")
-        if 'rural_status' in df.columns:
-            rural = df.groupby('rural_status')['total_underserved'].sum().reset_index()
-            fig3 = px.bar(rural, x='rural_status', y='total_underserved',
-                         color='rural_status',
-                         labels={'total_underserved': 'Total Underserved', 'rural_status': 'Area Type'},
-                         color_discrete_sequence=px.colors.qualitative.Set2)
-            fig3.update_layout(showlegend=False, height=350)
-            st.plotly_chart(fig3, use_container_width=True)
-
-    with tab3:
-        st.subheader("SQL Queries Used in This Analysis")
-        st.markdown("**Query 1: Top states by shortage severity**")
-        st.code("""SELECT state_name,
+with tab3:
+    st.subheader("SQL Queries Used in This Analysis")
+    st.markdown("**Query 1: Top states by shortage severity**")
+    st.code("""SELECT state_name,
        COUNT(*) AS total_shortage_areas,
        ROUND(AVG(hpsa_score), 1) AS avg_shortage_score,
        SUM(estimated_underserved_pop) AS total_underserved
@@ -152,8 +129,8 @@ GROUP BY state_name
 ORDER BY avg_shortage_score DESC
 LIMIT 10;""", language="sql")
 
-        st.markdown("**Query 2: Rural vs Urban comparison**")
-        st.code("""SELECT rural_status,
+    st.markdown("**Query 2: Rural vs Urban comparison**")
+    st.code("""SELECT rural_status,
        COUNT(*) AS total_areas,
        ROUND(AVG(hpsa_score), 1) AS avg_score,
        SUM(estimated_underserved_pop) AS total_underserved
@@ -162,8 +139,8 @@ WHERE hpsa_status = 'Designated'
 GROUP BY rural_status
 ORDER BY avg_score DESC;""", language="sql")
 
-        st.markdown("**Query 3: Full state export for visualization**")
-        st.code("""SELECT state_name, state_abbr,
+    st.markdown("**Query 3: Full state export for visualization**")
+    st.code("""SELECT state_name, state_abbr,
        COUNT(*) AS total_shortage_areas,
        ROUND(AVG(hpsa_score), 1) AS avg_score,
        SUM(estimated_underserved_pop) AS total_underserved,
@@ -175,5 +152,5 @@ AND state_name IS NOT NULL
 GROUP BY state_name, state_abbr, rural_status
 ORDER BY total_underserved DESC;""", language="sql")
 
-    st.markdown("---")
-    st.markdown("Built by [Rahma Ras](https://rahmaras.github.io) · Data: HRSA Open Data (May 2026) · [Tableau Dashboard](https://public.tableau.com/app/profile/rahma.ras/viz/USHealthcareWorkforceShortageTracker/Dashboard2)")
+st.markdown("---")
+st.markdown("Built by [Rahma Ras](https://rahmaras.github.io) · Data: HRSA Open Data (May 2026) · [Tableau Dashboard](https://public.tableau.com/app/profile/rahma.ras/viz/USHealthcareWorkforceShortageTracker/Dashboard2) · [GitHub](https://github.com/RahmaRas/healthcare-ai-dashboard)")
