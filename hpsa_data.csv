@@ -1,0 +1,185 @@
+state_name,state_abbr,rural_status,avg_score,total_underserved,total_shortage_areas,total_providers_needed
+U.S. Virgin Islands,VI,Rural,17.6,11289,5,4
+Puerto Rico,PR,Non-Rural,13.7,65822,28,24
+Wyoming,WY,Rural,15.6,45659,28,14
+Wyoming,WY,Partially Rural,14.2,101874,21,31
+Wyoming,WY,Unknown,12.0,12514,3,4
+Wisconsin,WI,Rural,13.6,151665,122,54
+Wisconsin,WI,Non-Rural,13.4,9189725,390,3072
+Wisconsin,WI,Partially Rural,15.0,81409,3,26
+Marshall Islands,MH,Rural,25.0,1647898,31,549
+Guam,GU,Rural,15.8,11796,4,5
+Federated States of Micronesia,FM,Rural,23.9,99674,8,33
+American Samoa,AS,Rural,21.7,260045,6,87
+Wyoming,WY,Non-Rural,22.0,0,4,0
+West Virginia,WV,Rural,17.3,245122,99,88
+West Virginia,WV,Non-Rural,15.2,62521,16,23
+Puerto Rico,PR,Partially Rural,16.4,313197,7,104
+Puerto Rico,PR,Rural,16.7,26592,7,9
+Republic of Palau,PW,Rural,24.0,318512,17,106
+Northern Mariana Islands,MP,Rural,16.4,39160,5,11
+Marshall Islands,MH,Non-Rural,24.0,0,1,0
+Washington,WA,Non-Rural,14.3,27754023,430,8260
+Washington,WA,Rural,13.8,531363,136,160
+Washington,WA,Partially Rural,12.6,2611518,58,749
+Washington,WA,Unknown,9.4,17172,16,5
+Virginia,VA,Non-Rural,14.6,1023435,80,340
+Virginia,VA,Rural,14.6,417709,124,144
+Virginia,VA,Partially Rural,12.1,93635,8,31
+Virginia,VA,Unknown,15.0,0,2,3
+Vermont,VT,Rural,7.4,6603,14,2
+Vermont,VT,Partially Rural,10.0,12313,7,4
+West Virginia,WV,Partially Rural,15.9,111591,8,36
+Vermont,VT,Non-Rural,8.0,0,1,0
+Utah,UT,Rural,12.4,61405,46,19
+Utah,UT,Non-Rural,12.4,12127037,96,3470
+Texas,TX,Rural,14.9,1489763,264,500
+Texas,TX,Non-Rural,15.5,32949560,914,10710
+Texas,TX,Partially Rural,13.9,1299103,53,413
+Texas,TX,Not Applicable,15.5,28719,2,8
+Utah,UT,Partially Rural,11.5,324405,11,94
+Utah,UT,Unknown,17.0,5629,1,2
+Tennessee,TN,Non-Rural,15.6,9070566,424,3024
+Tennessee,TN,Rural,15.5,568529,121,188
+Tennessee,TN,Partially Rural,13.3,187565,11,62
+South Dakota,SD,Rural,14.8,127516,91,41
+South Dakota,SD,Partially Rural,14.0,30959,2,9
+South Carolina,SC,Non-Rural,9.3,981430,146,311
+South Carolina,SC,Rural,16.5,205025,57,79
+South Carolina,SC,Partially Rural,10.5,234316,28,75
+North Dakota,ND,Rural,14.4,101507,79,31
+South Dakota,SD,Non-Rural,14.2,119366,20,40
+Rhode Island,RI,Non-Rural,14.3,38033,13,13
+Rhode Island,RI,Rural,10.0,4101,2,1
+Pennsylvania,PA,Rural,12.4,278474,116,120
+Pennsylvania,PA,Non-Rural,13.2,1345604,137,459
+Pennsylvania,PA,Partially Rural,13.0,774902,188,257
+New Jersey,NJ,Non-Rural,11.7,1148551,140,336
+Oregon,OR,Non-Rural,16.0,461296,40,132
+Oregon,OR,Rural,14.2,211900,97,75
+Oregon,OR,Partially Rural,12.9,1120214,15,339
+Oregon,OR,Unknown,6.0,0,1,2
+Oklahoma,OK,Non-Rural,18.0,3546257,101,1234
+Oklahoma,OK,Rural,16.7,470271,158,156
+Oklahoma,OK,Partially Rural,16.3,82538,9,28
+Ohio,OH,Non-Rural,17.4,51071117,988,17035
+Ohio,OH,Rural,13.9,597453,118,211
+Ohio,OH,Partially Rural,14.9,273758,21,90
+Ohio,OH,Unknown,14.0,108490,10,36
+North Dakota,ND,Non-Rural,15.0,0,3,1
+North Carolina,NC,Non-Rural,15.8,12571165,485,4202
+North Carolina,NC,Rural,15.2,570706,144,205
+North Carolina,NC,Partially Rural,15.1,1000057,71,329
+New York,NY,Rural,15.6,345630,68,116
+New York,NY,Non-Rural,16.1,153171595,1734,51053
+North Dakota,ND,Partially Rural,16.2,270253,53,82
+North Carolina,NC,Unknown,14.7,7309,3,2
+New York,NY,Unknown,16.7,32037,7,12
+New York,NY,Partially Rural,14.9,293416,16,98
+New Mexico,NM,Rural,18.4,265574,77,86
+New Mexico,NM,Partially Rural,17.0,450556,8,149
+New Mexico,NM,Non-Rural,20.1,289695,35,97
+New Jersey,NJ,Partially Rural,11.0,14893,1,4
+New Jersey,NJ,Rural,9.8,0,5,10
+New Hampshire,NH,Partially Rural,10.3,228780,44,69
+New Hampshire,NH,Rural,9.8,8622,16,4
+Nevada,NV,Rural,14.6,298309,40,87
+Nevada,NV,Non-Rural,17.0,10637913,182,3470
+New Hampshire,NH,Non-Rural,15.8,2433,5,1
+Nevada,NV,Unknown,15.0,1741,2,1
+New Hampshire,NH,Unknown,17.0,0,1,0
+Nevada,NV,Partially Rural,16.1,457590,15,138
+Nebraska,NE,Rural,12.2,209235,134,67
+Montana,MT,Non-Rural,19.0,0,8,0
+Montana,MT,Rural,15.2,134679,112,44
+Missouri,MO,Rural,16.4,865518,311,289
+Missouri,MO,Non-Rural,18.9,14726596,360,4906
+Nebraska,NE,Non-Rural,16.5,22173,10,7
+Nebraska,NE,Unknown,13.0,0,1,0
+Missouri,MO,Partially Rural,16.7,162556,6,54
+Montana,MT,Partially Rural,12.0,16063,3,5
+Mississippi,MS,Rural,19.9,647722,139,224
+Mississippi,MS,Non-Rural,18.9,564933,36,189
+Minnesota,MN,Rural,13.4,1603475,309,478
+Minnesota,MN,Partially Rural,12.6,2616095,459,777
+Minnesota,MN,Non-Rural,14.6,5772160,314,1918
+Minnesota,MN,Unknown,13.0,7017,2,2
+Mississippi,MS,Partially Rural,18.0,120330,6,40
+Michigan,MI,Non-Rural,19.3,23280881,375,7770
+Michigan,MI,Rural,14.3,500596,217,177
+Michigan,MI,Partially Rural,14.5,500688,13,167
+Massachusetts,MA,Non-Rural,13.7,686280,88,233
+Massachusetts,MA,Rural,10.7,71339,22,20
+Maryland,MD,Non-Rural,15.9,9035456,204,2778
+Maryland,MD,Rural,17.5,92366,10,31
+Maryland,MD,Partially Rural,15.2,302683,8,100
+Maine,ME,Rural,11.4,34885,65,11
+Maine,ME,Non-Rural,11.5,38756,16,12
+Maine,ME,Partially Rural,12.7,696505,234,213
+Massachusetts,MA,Partially Rural,9.7,125556,35,36
+Louisiana,LA,Rural,15.3,202740,117,77
+Louisiana,LA,Non-Rural,14.6,1329661,126,414
+Louisiana,LA,Unknown,17.0,0,2,0
+Kentucky,KY,Rural,17.3,708639,220,238
+Kentucky,KY,Non-Rural,18.8,5650770,139,1887
+Kentucky,KY,Partially Rural,15.8,137869,12,45
+Kentucky,KY,Unknown,15.6,29116,5,9
+Louisiana,LA,Partially Rural,14.1,268749,18,81
+Iowa,IA,Rural,13.6,229166,143,74
+Iowa,IA,Non-Rural,15.1,4229906,138,1410
+Kansas,KS,Rural,13.6,152530,136,53
+Kansas,KS,Non-Rural,17.8,119120,16,40
+Kansas,KS,Partially Rural,14.8,76537,4,26
+Iowa,IA,Partially Rural,13.2,211279,39,67
+Indiana,IN,Rural,12.8,253716,75,85
+Indiana,IN,Unknown,13.0,41912,8,12
+Indiana,IN,Partially Rural,12.2,146834,12,47
+Indiana,IN,Non-Rural,16.4,2712335,130,912
+Illinois,IL,Non-Rural,16.9,11458681,558,3773
+Illinois,IL,Rural,15.1,541542,191,186
+Illinois,IL,Partially Rural,15.8,70355,5,22
+Iowa,IA,Unknown,10.8,4348,4,2
+Idaho,ID,Non-Rural,13.3,303216,25,105
+Idaho,ID,Partially Rural,13.1,108554,15,36
+Idaho,ID,Rural,14.2,147898,81,49
+Hawaii,HI,Rural,12.4,69119,19,20
+Hawaii,HI,Non-Rural,12.6,570720,22,167
+Georgia,GA,Non-Rural,18.5,228784,44,84
+Georgia,GA,Rural,17.1,510811,138,197
+Georgia,GA,Partially Rural,17.0,111365,7,37
+Florida,FL,Non-Rural,16.4,4300706,235,1466
+Florida,FL,Rural,14.2,225290,99,122
+Florida,FL,Partially Rural,15.5,509364,24,169
+Hawaii,HI,Partially Rural,13.8,1206978,22,345
+District of Columbia,DC,Non-Rural,18.9,10881712,156,3627
+Delaware,DE,Rural,11.0,118694,4,43
+Delaware,DE,Non-Rural,15.5,6303297,83,2104
+Florida,FL,Not Applicable,16.0,11214,1,4
+Connecticut,CT,Non-Rural,14.2,952934,105,319
+Connecticut,CT,Rural,14.5,22432,4,6
+Connecticut,CT,Partially Rural,18.0,11218,2,4
+Delaware,DE,Partially Rural,16.0,72733,1,24
+Colorado,CO,Rural,14.9,138879,80,55
+Colorado,CO,Partially Rural,14.7,215898,25,68
+Colorado,CO,Non-Rural,15.3,2943587,194,985
+California,CA,Non-Rural,13.7,23595777,1067,7804
+California,CA,Rural,14.8,2348115,329,741
+Arizona,AZ,Rural,16.4,1259444,168,405
+Not Determined,XX,Unknown,12.0,0,2,3
+Colorado,CO,Unknown,15.7,18850,6,6
+California,CA,Partially Rural,14.0,2779738,144,867
+California,CA,Unknown,10.5,204992,46,62
+Arkansas,AR,Rural,15.3,288380,129,107
+Arkansas,AR,Non-Rural,14.6,168449,18,58
+Arizona,AZ,Non-Rural,14.8,18180988,646,5748
+Arkansas,AR,Partially Rural,16.0,68676,2,23
+Arizona,AZ,Partially Rural,14.7,2545132,160,780
+Arizona,AZ,Unknown,15.1,689107,46,217
+Alaska,AK,Non-Rural,3.5,0,24,4
+Alaska,AK,Rural,11.3,108086,306,35
+Alabama,AL,Rural,16.4,310547,71,104
+Alabama,AL,Non-Rural,16.9,220362,26,74
+Alaska,AK,Unknown,8.5,1737,4,0
+Alaska,AK,Partially Rural,11.4,84191,5,26
+Alabama,AL,Unknown,15.0,0,1,0
+Alabama,AL,Partially Rural,12.7,117883,7,36
