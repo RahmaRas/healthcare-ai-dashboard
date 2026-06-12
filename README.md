@@ -22,9 +22,9 @@ Interactive Streamlit app analyzing **39,000+ real HRSA government records** to 
 
 ## Key findings
 
-- **522M+** Americans live in designated shortage areas across 60 states and territories
-- The U.S. needs approximately **~X,XXX additional providers** to close all shortage gaps
+- **19,412 shortage areas** are currently designated across 60 states and territories
 - Non-rural areas have a *higher* total underserved population than rural — a finding that challenges common assumptions about where shortages occur
+- States like Texas, New York, and Kentucky show the steepest gaps between available providers and population need
 
 ## Data source
 
